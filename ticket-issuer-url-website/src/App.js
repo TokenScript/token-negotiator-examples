@@ -36,39 +36,47 @@ function App() {
 
   let [tokens, setTokens] = useState([]);
 
-    let devconConfig = config;
+  let [retryButton, setRetryButton] = useState("");
 
-    devconConfig.collectionID = "devcon";
-
-    devconConfig = updateTokenConfig(devconConfig);
+    let devconConfig = updateTokenConfig(config);
 
     let tokenIssuers = [
         devconConfig
     ];
 
-  let negotiator = new Client({
+  window.negotiator = new Client({
     type: 'passive',
-    issuers: tokenIssuers,
-    options: {}
+    issuers: tokenIssuers
   });
 
-  negotiator.on('tokens', (issuerTokens) => {
+  window.negotiator.on('tokens', (issuerTokens) => {
 
     let tokens = [];
     
     tokenIssuers.map((issuer) => {
 
-      tokens.push(...issuerTokens[issuer.tokenName].tokens);
+      tokens.push(...issuerTokens[issuer.collectionID].tokens);
 
     });
 
     setTokens(tokens);
     
   });
-  
+
+  window.negotiator.on("error", ({error, issuer}) => {
+        if (error.name === "POPUP_BLOCKED"){
+            setRetryButton("Popup blocked");
+        } else if (error.name === "USER_ABORT"){
+            setRetryButton("Action aborted");
+        } else {
+            console.log(error);
+            setRetryButton("An error occurred loading tokens");
+        }
+    });
+
   useEffect(() => {
 
-    negotiator.negotiate();
+    window.negotiator.negotiate();
 
   }, []);
 
@@ -156,6 +164,15 @@ function App() {
             !tokens.length && <div>
               <b>- no ticket found -</b>
             </div>
+          }
+          { retryButton &&
+              <div>
+                  <h5 style={{color: "red"}}>{retryButton}</h5>
+                  <button className="makeTicket" style={{backgroundColor: "#f58b77"}} onClick={() => {
+                      setRetryButton("");
+                      negotiator.negotiate();
+                  }}>Retry</button>
+              </div>
           }
         </div>
       </div>

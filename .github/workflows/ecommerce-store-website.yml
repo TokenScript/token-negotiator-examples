@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: 16
           cache: "npm"
+          cache-dependency-path: 'ecommerce-store-website/package-lock.json'
       - run: |
           echo -n "Node version: "
           node -v

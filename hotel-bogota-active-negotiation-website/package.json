@@ -12,7 +12,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@tokenscript/token-negotiator": "1.0.0",
+    "@tokenscript/token-negotiator": "^1.0.2",
     "add": "^2.0.6",
     "date-fns": "latest",
     "ethers": "^5.4.0",

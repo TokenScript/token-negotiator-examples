@@ -5,10 +5,7 @@ import "@tokenscript/token-negotiator/dist/theme/style.css";
 const App = () => {
   return (
     <TokenContextProvider>
-      <>
-        <BookingPage/>
-        <div className="overlay-tn"></div>
-      </>
+      <BookingPage/>
     </TokenContextProvider>
   )
 }

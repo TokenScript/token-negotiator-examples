@@ -1,13 +1,8 @@
-// @ts-nocheck
-
-// import { Outlet } from './src/outlet/index';
 import { Outlet } from '@tokenscript/token-negotiator';
-
-import config from '../../tokenConfig.json';
 import {updateTokenConfig} from "../../environment";
+// @ts-ignore
+import config from '../../tokenConfig.json';
 
-let devconConfig = config;
-
-devconConfig = updateTokenConfig(devconConfig);
+let devconConfig = updateTokenConfig(config);
 
 new Outlet(devconConfig);

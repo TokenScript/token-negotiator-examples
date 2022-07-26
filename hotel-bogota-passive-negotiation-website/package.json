@@ -7,7 +7,7 @@
     "@material-ui/core": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "latest",
-    "@tokenscript/token-negotiator": "1.0.0",
+    "@tokenscript/token-negotiator": "^1.0.2",
     "add": "^2.0.6",
     "date-fns": "latest",
     "ethers": "^5.4.0",

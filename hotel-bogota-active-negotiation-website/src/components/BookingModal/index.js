@@ -33,20 +33,22 @@ export default function BookingModal({room}) {
   const [open, setOpen] = useState(false);
 
   const [bookingDone, setBookingDone] = useState(false);
+   
+  const [proofFailed, setProofFailed] = useState(false);
   
   const [loadingTokenProof, setLoadingTokenProof] = useState(false);
 
   const useToken = async () => {
     try {
-      negotiator.authenticate({
+      await negotiator.authenticate({
         issuer: 'devcon',
         unsignedToken: tokens[0]
       });
-
       setLoadingTokenProof(true);
-
     } catch (e) {
       console.error(e);
+      setProofFailed(true);
+      setLoadingTokenProof(false);
     }
   }
 
@@ -237,7 +239,7 @@ export default function BookingModal({room}) {
               <div className="booking">
                 <DialogActions>
                   {
-                    tokens.length > 0 && !proof && !loadingTokenProof &&
+                    tokens.length > 0 && !proof && !loadingTokenProof && proofFailed === false &&
                     <Button
                         color="primary"
                         className="paynow"
@@ -261,7 +263,7 @@ export default function BookingModal({room}) {
                     </Button>
                   }
                   {
-                    (tokens.length === 0 || proof) &&
+                    (proof) &&
                     <Button
                         color="primary"
                         className="paynow"
@@ -270,6 +272,18 @@ export default function BookingModal({room}) {
                         color="primary"
                     >
                       Pay Now
+                    </Button>
+                  }
+                  {
+                    (tokens.length === 0 || proofFailed) &&
+                    <Button
+                        color="primary"
+                        className="paynow"
+                        variant="contained"
+                        onClick={handleSubmit}
+                        color="primary"
+                    >
+                      Pay Now (no discount)
                     </Button>
                   }
                 </DialogActions>

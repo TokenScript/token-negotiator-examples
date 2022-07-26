@@ -11,7 +11,7 @@ const tokenKeys = [
   'devcon'
 ];
 
-let negotiator;
+window.negotiator = null;
 
 const TokenContextProvider = (props) => {
 
@@ -21,7 +21,7 @@ const TokenContextProvider = (props) => {
   
   useEffect(() => {
     
-    negotiator.on("tokens-selected", (tokens) => { 
+    window.negotiator.on("tokens-selected", (tokens) => { 
     
       let selectedTokensState = [];
 
@@ -39,11 +39,11 @@ const TokenContextProvider = (props) => {
 
     });
 
-    negotiator.on("token-proof", (proof) => { 
+    window.negotiator.on("token-proof", (result) => {
 
-      console.log('token proof', proof);
+      console.log('token proof', result.data);
           
-      setProof(proof);
+      setProof(result.data);
 
     });
     
@@ -75,28 +75,25 @@ class TokenNegotiatorInstance extends React.Component {
 
     devconConfig = updateTokenConfig(devconConfig);
 
-    negotiator = new Client({
+    window.negotiator = new Client({
       type: 'active',
       issuers: [
         devconConfig
       ],
-      options: {
-        overlay: {
-          openingHeading: "Open a new world of discounts available with your tokens.",
-          issuerHeading: "Get discount with Ticket",
-          repeatAction: "try again",
-          theme: "light",
-          position: "bottom-right"
-        }
-      },
-      filter: {}
+      uiOptions: {
+        openingHeading: "Open a new world of discounts available with your tokens.",
+        issuerHeading: "Get discount with Ticket",
+        repeatAction: "try again",
+        theme: "light",
+        position: "bottom-right"
+      }
     });
 
-    negotiator.negotiate();
+    window.negotiator.negotiate();
     
   }
   render() {
-    return this.props.render({ negotiator: negotiator })
+    return this.props.render({ negotiator: window.negotiator })
   };
 }
 

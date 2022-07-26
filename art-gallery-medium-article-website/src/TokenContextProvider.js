@@ -6,7 +6,7 @@ const TokenContext = createContext({
   tokens: []
 });
 
-let negotiator;
+window.negotiator = null;
 
 const TokenContextProvider = (props) => {
 
@@ -14,7 +14,7 @@ const TokenContextProvider = (props) => {
 
   useEffect(() => {
     
-    negotiator.on("tokens-selected", (tokens) => { 
+    window.negotiator.on("tokens-selected", (tokens) => { 
     
       setTimeout(() => {
       
@@ -56,30 +56,27 @@ class TokenNegotiatorInstance extends React.Component {
     
     super(props);
 
-    if(negotiator) return;
+    if(window.negotiator) return;
 
-    negotiator = new Client({
+    window.negotiator = new Client({
       type: 'active',
       issuers: [
         { collectionID: 'demo-tokens', onChain: true, contract: '0x0d0167a823c6619d430b1a96ad85b888bcf97c37', chain: 'eth' }
       ],
-      options: {
-        overlay: {
-          openingHeading: "Open a new world of discounts available with your tokens.",
-          issuerHeading: "Discount with your tokens",
-          repeatAction: "try again",
-          theme: "light",
-          position: "bottom-right"
-        }
-      },
-      filter: {}
+      uiOptions: {
+        openingHeading: "Open a new world of discounts available with your tokens.",
+        issuerHeading: "Discount with your tokens",
+        repeatAction: "try again",
+        theme: "light",
+        position: "bottom-right"
+      }
     });
 
-    negotiator.negotiate();
+    window.negotiator.negotiate();
     
   }
   render() {
-    return this.props.render({ negotiator: negotiator })
+    return this.props.render({ negotiator: window.negotiator })
   };
 }
 

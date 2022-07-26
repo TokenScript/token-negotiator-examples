@@ -85,17 +85,17 @@ export default function App({ Component, pageProps }) {
 						openSeaSlug: 'stl-riot-racers-nfts-v3'
 					}*/
 				],
-				options: {
-					overlay: {
-						openingHeading: "Open a new world of discounts available with your tokens.",
-						issuerHeading: "Get discounts with tokens",
-						repeatAction: "try again",
-						theme: "light",
-						position: "bottom-right"
-					},
-					filters: {},
+				uiOptions: {
+					openingHeading: "Open a new world of discounts available with your tokens.",
+					issuerHeading: "Get discounts with tokens",
+					repeatAction: "try again",
+					theme: "light",
+					position: "bottom-right"
 				},
-				ipfsBaseUrl: "https://smart-token-labs-demo-server.mypinata.cloud/ipfs/"
+				safeConnectOptions: {
+					url: "https://safeconnect.tokenscript.org",
+					initialProof: false
+				}
 			});
 
 			//window.negotiator.negotiate();

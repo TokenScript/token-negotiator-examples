@@ -1,35 +1,35 @@
 {
-	"name": "stl-token-negotiator-web",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"build-static": "next build && next export",
-		"start": "next start",
-		"lint": "next lint"
-	},
-	"dependencies": {
-		"@react-spring/web": "^9.3.1",
-		"@tokenscript/token-negotiator": "1.0.0",
-		"@use-gesture/react": "^10.1.6",
-		"body-scroll-lock": "^4.0.0-beta.0",
-		"clsx": "^1.1.1",
-		"cors": "^2.8.5",
-		"formik": "^2.2.9",
-		"lodash-es": "^4.17.21",
-		"next": "12.1.5",
-		"react": "17.0.2",
-		"react-dom": "17.0.2",
-		"web3": "^1.7.3",
-		"web3-eth-abi": "^1.7.3",
-		"yup": "^0.32.11",
-		"zustand": "^3.6.5"
-	},
-	"devDependencies": {
-		"dotenv": "^16.0.0",
-		"eslint": "8.12.0",
-		"eslint-config-next": "12.1.4",
-		"resize-observer-polyfill": "^1.5.1",
-		"sass": "^1.43.5"
-	}
+  "name": "stl-token-negotiator-web",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build-static": "next build && next export",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@react-spring/web": "^9.3.1",
+    "@tokenscript/token-negotiator": "^1.0.2",
+    "@use-gesture/react": "^10.1.6",
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "clsx": "^1.1.1",
+    "cors": "^2.8.5",
+    "formik": "^2.2.9",
+    "lodash-es": "^4.17.21",
+    "next": "12.1.5",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "web3": "^1.7.3",
+    "web3-eth-abi": "^1.7.3",
+    "yup": "^0.32.11",
+    "zustand": "^3.6.5"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.4",
+    "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.43.5"
+  }
 }

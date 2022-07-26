@@ -12,11 +12,7 @@ declare global {
     }
 }
 
-let devonConfig = config;
-
-devonConfig.collectionID = "devcon";
-
-devonConfig = updateTokenConfig(devonConfig);
+let devonConfig = updateTokenConfig(config);
 
 const issuers = [
     devonConfig,
@@ -33,19 +29,25 @@ const issuers = [
 // ACTIVE
 window.negotiator = new Client({
     type: 'active',
-    issuers: issuers,
-    options: {
-        overlay: {
-            openingHeading: "Open a new world of discounts available with your tokens.",
-            issuerHeading: "Get discount with Ticket",
-            repeatAction: "try again",
-            theme: "light",
-            position: "bottom-right"
-        },
-        filters: {},
+    issuers: [
+        { collectionID: 'rinkeby-punk', onChain: true, contract: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656', chain: 'rinkeby', openSeaSlug: 'rinkeby-punk' },
+        { collectionID: 'expansion-punk', onChain: true, contract: '0x0d0167a823c6619d430b1a96ad85b888bcf97c37', chain: 'eth' },
+        { collectionID: 'women-tribe', onChain: true, contract: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656', chain: 'rinkeby', openSeaSlug: 'stl-rnd-women-tribe-nfts' }
+    ],
+    uiOptions: {
+        //uiType: "inline",
+        //containerElement: "#negotiator-inline",
+        openingHeading: "Open a new world of discounts available with your tokens.",
+        issuerHeading: "Get discount with Ticket",
+        repeatAction: "try again",
+        theme: "light",
+        position: "bottom-right"
     },
     autoLoadTokens: 3,
-    autoEnableTokens: true
+    safeConnectOptions: {
+        url: "https://safeconnect.tokenscript.org",
+        initialProof: false
+    }
 });
 
 var curTokens = [];
@@ -90,8 +92,8 @@ window.negotiator.on("tokens-selected", (tokens:any) => {
 
 });
 
-window.negotiator.on("token-proof", (proof:any) => {
-    console.log(proof);
+window.negotiator.on("token-proof", (data:any) => {
+    console.log(data);
 });
 
 window.negotiator.negotiate();
